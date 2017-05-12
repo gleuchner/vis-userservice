@@ -1,7 +1,5 @@
 package de.hska.muon.model;
 
-/**
- * Created by gerrit on 12.05.17.
- */
-public interface UserRepo {
-}
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface UserRepo extends JpaRepository<User, Integer> {}
