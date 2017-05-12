@@ -3,26 +3,26 @@ package de.hska.muon.api;
 import de.hska.muon.model.NewUser;
 import de.hska.muon.model.User;
 
+import de.hska.muon.model.UserRepo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
-
-import javax.validation.constraints.*;
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-05-04T12:49:09.193Z")
 
 @Controller
 public class UsersApiController {
 
+    @Autowired
+    private UserRepo repo;
+
     @RequestMapping(value = "/users",
             produces = { "application/json" },
             method = RequestMethod.GET)
-    ResponseEntity<Void> usersGet() {
-
-        return null;
+    ResponseEntity<Iterable<User>> usersGet() {
+        return new ResponseEntity<Iterable<User>>(repo.findAll(), HttpStatus.OK);
     }
 
 
@@ -30,8 +30,19 @@ public class UsersApiController {
             produces = { "application/json" },
             method = RequestMethod.POST)
     ResponseEntity<User> usersPost(@RequestBody NewUser newUser) {
+        if(repo.findByUsername(newUser.getUsername()).iterator().hasNext()) {
+            return new ResponseEntity<User>(HttpStatus.UNPROCESSABLE_ENTITY);
+        } else {
+            User user = new User();
+            user.setFirstname(newUser.getFirstname());
+            user.setName(newUser.getName());
+            user.setPassword(newUser.getPassword());
+            user.setRole(newUser.getRole());
+            user.setUsername(newUser.getUsername());
 
-        return null;
+            User save = repo.save(user);
+            return new ResponseEntity<User>(save, HttpStatus.OK);
+        }
     }
 
     @RequestMapping(value = "/users/{userId}",
@@ -39,7 +50,12 @@ public class UsersApiController {
             method = RequestMethod.GET)
     ResponseEntity<User> usersUserIdGet(@PathVariable("userId") Integer userId) {
 
-        return null;
+        User user = repo.findOne(userId);
+        if(user != null) {
+            return new ResponseEntity<User>(user, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
+        }
     }
 
 

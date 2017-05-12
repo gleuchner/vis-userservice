@@ -3,29 +3,43 @@ package de.hska.muon.model;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
-import javax.validation.constraints.*;
+
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 /**
  * User
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-05-04T12:49:09.193Z")
-
+@javax.persistence.Entity
+@Table(name = "user")
 public class User   {
-  @JsonProperty("userId")
-  private Integer userId = null;
 
-  @JsonProperty("firstname")
-  private String firstname = null;
+  @JsonProperty("userId")
+  @Id
+  @GeneratedValue
+  @Column(name = "userId")
+  private Integer userId;
+
+  @JsonProperty("firstName")
+  @Column(name = "firstName")
+  private String firstname;
 
   @JsonProperty("name")
-  private String name = null;
+  @Column(name = "name")
+  private String name;
 
-  @JsonProperty("username")
-  private String username = null;
+  @JsonProperty("userName")
+  @Column(name = "userName")
+  private String username;
 
   @JsonProperty("password")
-  private String password = null;
+  @Column(name = "password")
+  private String password;
 
   @JsonProperty("role")
+  @Column(name = "role")
   private Integer role = null;
 
   public User userId(Integer userId) {

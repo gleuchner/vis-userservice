@@ -10,8 +10,6 @@ import javax.validation.constraints.*;
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-05-04T12:49:09.193Z")
 
 public class NewUser   {
-  @JsonProperty("userId")
-  private Integer userId = null;
 
   @JsonProperty("firstname")
   private String firstname = null;
@@ -27,23 +25,6 @@ public class NewUser   {
 
   @JsonProperty("role")
   private Integer role = null;
-
-  public NewUser userId(Integer userId) {
-    this.userId = userId;
-    return this;
-  }
-
-   /**
-   * Id of the user.
-   * @return userId
-  **/
-  public Integer getUserId() {
-    return userId;
-  }
-
-  public void setUserId(Integer userId) {
-    this.userId = userId;
-  }
 
   public NewUser firstname(String firstname) {
     this.firstname = firstname;
@@ -140,8 +121,7 @@ public class NewUser   {
       return false;
     }
     NewUser newUser = (NewUser) o;
-    return Objects.equals(this.userId, newUser.userId) &&
-        Objects.equals(this.firstname, newUser.firstname) &&
+    return Objects.equals(this.firstname, newUser.firstname) &&
         Objects.equals(this.name, newUser.name) &&
         Objects.equals(this.username, newUser.username) &&
         Objects.equals(this.password, newUser.password) &&
@@ -150,7 +130,7 @@ public class NewUser   {
 
   @Override
   public int hashCode() {
-    return Objects.hash(userId, firstname, name, username, password, role);
+    return Objects.hash(firstname, name, username, password, role);
   }
 
   @Override
@@ -158,7 +138,6 @@ public class NewUser   {
     StringBuilder sb = new StringBuilder();
     sb.append("class NewUser {\n");
     
-    sb.append("    userId: ").append(toIndentedString(userId)).append("\n");
     sb.append("    firstname: ").append(toIndentedString(firstname)).append("\n");
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("    username: ").append(toIndentedString(username)).append("\n");
