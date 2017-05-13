@@ -1,0 +1,7 @@
+version: '2'
+services:
+ category:
+   image: hska/vis-userservice
+   build: .
+   ports:
+     - "8888:8080"
