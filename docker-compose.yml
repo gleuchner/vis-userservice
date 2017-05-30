@@ -4,4 +4,4 @@ services:
    image: hska/vis-userservice
    build: .
    ports:
-     - "8888:8080"
+     - "8888:8082"
