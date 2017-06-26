@@ -22,7 +22,7 @@ public class User   {
   @Column(name = "userId")
   private Integer userId;
 
-  @JsonProperty("firstName")
+  @JsonProperty("firstname")
   @Column(name = "firstName")
   private String firstname;
 
@@ -30,7 +30,7 @@ public class User   {
   @Column(name = "name")
   private String name;
 
-  @JsonProperty("userName")
+  @JsonProperty("username")
   @Column(name = "userName")
   private String username;
 
